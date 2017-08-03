@@ -13,7 +13,7 @@
 			*{-webkit-box-sizing:border-box;}
 			html,body{margin: 0;width: 100%;height: 100%;}
 			.container{width: 100%;height: 288px;position: relative;overflow:hidden;}
-			ul{padding: 0;margin: 0;list-style: none;width: 400%;height: 288px;position: absolute;transition :all 300ms;}
+			ul{padding: 0;margin: 0;list-style: none;width: 400%;height: 288px;position: absolute;}
 			ul li{width: 25%;float:left;height: 288px;background: #ccc;border: solid 1px #FFFA90;}
 		</style>
 	</head>
@@ -40,6 +40,8 @@
 		var oleft=0;
 		var n=0;
 		list.addEventListener("touchstart",function(ev){
+			list.style.webkitTransition="none";
+			
 			ev.preventDefault();
 			var ex=ev.changedTouches[0].pageX;
 			oleft=this.offsetLeft;
@@ -49,6 +51,7 @@
 				list.style.left=oleft+dis+"px";
 			});
 			list.addEventListener("touchend",function(){
+				list.style.webkitTransition="all 200ms";
 				n=Math.round(this.offsetLeft/w);
 				if(n>0){
 					n=0;
