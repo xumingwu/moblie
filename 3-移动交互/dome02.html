@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script  type="text/javascript">
+            (window.onresize=function(){
+                document.documentElement.style.fontSize=innerWidth/16+'px';
+            })();
+    	</script>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+		<title></title>
+		<style>
+			*{-webkit-box-sizing:border-box;}
+			html,body{margin: 0;width: 100%;height: 100%;}
+			.container{width: 100%;height: 288px;position: relative;overflow:hidden;}
+			ul{padding: 0;margin: 0;list-style: none;width: 400%;height: 288px;position: absolute;transition :all 300ms;}
+			ul li{width: 25%;float:left;height: 288px;background: #ccc;border: solid 1px #FFFA90;}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<ul id="list">
+				<li><img src="image/image1.jpg" alt="" /></li>
+				<li><img src="image/image2.jpg" alt="" /></li>
+				<li><img src="image/image3.jpg" alt="" /></li>
+				<li><img src="image/image4.jpg" alt="" /></li>
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript">
+		function getStyle(obj,attr){
+			return getComputedStyle(obj,null)[attr];
+		}
+		var list=document.getElementById("list");
+		var lis=list.getElementsByTagName("li");
+		var w=parseInt(getStyle(lis[0],"width"));
+		var oleft=0;
+		var n=0;
+		list.addEventListener("touchstart",function(ev){
+			ev.preventDefault();
+			var ex=ev.changedTouches[0].pageX;
+			oleft=this.offsetLeft;
+			list.addEventListener("touchmove",function(ev){
+				var dis=ev.changedTouches[0].pageX-ex;
+				console.log(dis);
+				list.style.left=oleft+dis+"px";
+			});
+			list.addEventListener("touchend",function(){
+				n=Math.round(this.offsetLeft/w);
+				if(n>0){
+					n=0;
+				}else if(n<-lis.length+1){
+					n=-lis.length+1;
+				}
+				
+				list.style.left=n*w+"px";
+			})
+		})
+
+	</script>
+</html>

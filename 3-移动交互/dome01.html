@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+		<title></title>
+		<style>
+			.dome{
+				width:300px;
+				height: 300px;
+				background: #000;
+				opacity: 0.5;
+				position: absolute;
+				top:0;
+				color:red;
+			}
+		</style>
+	</head>
+	<body>
+		<a href="www.baidu.com">百度</a>
+		<div id="dome" class="dome"></div>
+	</body>
+	<script type="text/javascript">
+		var dome=document.querySelector("#dome");
+		dome.addEventListener("touchstart",function(event){
+			console.log("touchstart")
+			event.preventDefault();
+		});
+		dome.addEventListener("touchmove",function(event){
+			console.log(dome)
+			dome.innerHTML=event.changedTouches.length;
+			console.log(event.touches.length)
+		});
+		document.addEventListener("touchend",function(){
+			console.log("touchend");
+		})
+		dome.addEventListener("touchend",function(){
+//			this.style.display="none";
+		})
+	</script>
+</html>
