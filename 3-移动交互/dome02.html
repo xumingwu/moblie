@@ -28,6 +28,9 @@
 		</div>
 	</body>
 	<script type="text/javascript">
+		document.addEventListener("touchmove",function(ev){
+			ev.preventDefault();
+		})
 		function getStyle(obj,attr){
 			return getComputedStyle(obj,null)[attr];
 		}
